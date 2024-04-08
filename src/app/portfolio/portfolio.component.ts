@@ -128,6 +128,8 @@ export default class PortfolioComponent {
 
   public stacks: string[] =['html5','css3','javascript','typescript','angularX','react','vue','laravel','node-js','codeigniter','php','tailwind','bootstrap','mysql','postgresql','mongo','git','linux','docker', 'digital-ocean','vs-code'];
 
+  public menuSelected: string = 'home';
+
   constructor() {
     // this.responseData.data[0].job
     console.log(this.responseData.data[0].job);
@@ -135,6 +137,7 @@ export default class PortfolioComponent {
   }
 
   ngOnInit(): void {
+    this.menuSelected = 'home';
 
     const backToTopButton = document.querySelector(".back-to-top");
     if (backToTopButton) {
@@ -176,6 +179,7 @@ export default class PortfolioComponent {
   // Menu Scroll
   scrollToElement(event: Event, target: string) {
     event.preventDefault();
+    this.menuSelected = target.substr(1);
     const element = document.querySelector(target);
     if (element instanceof HTMLElement) { // Check if element is of type HTMLElement
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });

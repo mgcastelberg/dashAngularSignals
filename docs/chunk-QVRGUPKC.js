@@ -1,0 +1,1 @@
+import{Oa as i,Pa as a,S as o,Va as r,_a as s}from"./chunk-H22QLDTY.js";var f=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=o({type:e,selectors:[["ng-component"]],standalone:!0,features:[s],decls:2,vars:0,template:function(n,c){n&1&&(i(0,"p"),r(1,"defer-options works!"),a())}});let t=e;return t})();export{f as default};
