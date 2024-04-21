@@ -1,0 +1,1 @@
+import{Qa as i,Ra as a,T as o,Xa as r,ab as s}from"./chunk-ZKPM3QJE.js";var m=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=o({type:e,selectors:[["ng-component"]],standalone:!0,features:[s],decls:2,vars:0,template:function(n,d){n&1&&(i(0,"p"),r(1,"defer-views works!"),a())}});let t=e;return t})();export{m as default};
