@@ -1,22 +1,41 @@
+<h2 class="px-2 py-1 mb-2 text-2xl font-semibold">Control Flow</h2>
+
 <section class="grid grid-cols-1 gap-3 md:grid-cols-2">
-  <!-- <p>control-flow works!</p> -->
 
   <div class="p-10 bg-gray-300 rounded shadow-sm">
 
     Señal:
-    <h2 class="my-5 text-2xl font-bold">if: {{ showContent() }}</h2>
+    <h2 class="my-2 text-2xl font-bold">if: {{ showContent() }}</h2>
 
     <button (click)="toogleContent()" class="px-5 py-3 text-gray-200 bg-purple-600 rounded-md hover:bg-purple-500">
       Change Content
     </button>
 
     @if ( showContent() ) {
-      <p>Hola Mundo</p>
+      <p class="mt-2">Hola Mundo</p>
     }
     @else {
-      <p>********</p>
+      <p class="mt-2">********</p>
     }
 
+  </div>
+
+  <div class="p-10 bg-gray-300 rounded shadow-sm">
+    <!-- @switch -->
+    Señal:
+    <h2 class="my-2 text-2xl font-bold">{{ grade() }}</h2>
+
+    @switch (grade()) {
+      @case ('A') {
+          <p>Arriba de 90</p>
+      }
+      @case ('B') {
+          <p>Arriba de 80</p>
+      }
+      @case ('F') {
+          <p>Reprobado</p>
+      }
+    }
   </div>
 
 </section>

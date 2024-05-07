@@ -1,0 +1,15 @@
+{
+  "hello": "Hello World",
+  "home": "Home",
+  "experience": "Experience",
+  "projects": "Projects",
+  "stack": "Stack",
+  "contact": "Contact",
+  "language": "Language",
+  "english": "English",
+  "spanish": "Spanish",
+  "skill": "FullStack Developer",
+  "view site": "View Site",
+  "availability": "Open to work",
+  "experience_data": "Hi there! I'm <span class='font-bold text-orange-400'>Manuel Gómez C.</span> a software developer with <span class='font-bold text-orange-400'>10 years</span> of experience building user-friendly applications. Throughout my journey, I've <span class='font-bold text-orange-400'>collaborated</span> with my co-workers in their duties across diverse areas like backend, frontend, design, and database management. I <span class='font-bold text-orange-400'>constantly explore new technologies</span> and resources to build smooth and scalable apps."
+}

@@ -1,12 +1,16 @@
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, Pipe, PipeTransform } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ThemeService } from '../services/theme.service';
+// import { ThemeService } from '../services/theme.service';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 
 // Define la interfaz para representar la estructura del objeto
 interface ApiResponse {
   status: string;
   data: Array<{
+    lang: string;
     logo: string;
     job: string;
     date: string;
@@ -18,6 +22,7 @@ interface ApiResponse {
 interface ProjectsResponse {
   status: string;
   data: Array<{
+    lang: string;
     logo: string;
     title: string;
     description: string;
@@ -27,7 +32,7 @@ interface ProjectsResponse {
 
 @Component({
   standalone: true,
-  imports: [ RouterModule, CommonModule ],
+  imports: [ RouterModule, CommonModule, TranslateModule],
   templateUrl: './portfolio.component.html',
   styles: `
   .glow{
@@ -47,12 +52,14 @@ interface ProjectsResponse {
   }
   `
 })
-export default class PortfolioComponent {
+
+export default class PortfolioComponent{
 
   public responseData: ApiResponse = {
     status: "success",
     data: [
       {
+        lang: "en",
         logo: "/assets/images/brands/virket_logo.svg",
         job: "Backend Developer",
         date: "September 2020 - Currently Working",
@@ -67,17 +74,19 @@ export default class PortfolioComponent {
         ]
       },
       {
+        lang: "en",
         logo: "/assets/images/brands/tecno_aplicada.svg",
         job: "PHP Developer",
-        date: "december 2019 - March 2020",
+        date: "December 2019 - March 2020",
         activities: [
           "Development of backend services for <span class='font-bold text-orange-400'>SOAP</span> and <span class='font-bold text-orange-400'>RESTful</span> APIs.",
-          "Develop panel administration <span class='font-bold text-orange-400'>web apps</span>.",
+          "Development of <span class='font-bold text-orange-400'>web applications</span> and administration panels.",
           "Performing <span class='font-bold text-orange-400'>unit testing</span> in Laravel and Angular.",
-          "Using agile scrum methodology",
+          "Using agile <span class='font-bold text-orange-400'>Scrum</span> methodology",
         ]
       },
       {
+        lang: "en",
         logo: "/assets/images/brands/weplaycode.png",
         job: "Fullstack Developer",
         date: "November 2018 - November 2019",
@@ -90,13 +99,65 @@ export default class PortfolioComponent {
         ]
       },
       {
+        lang: "en",
         logo: "/assets/images/brands/novetec.png",
         job: "Web developer",
         date: "March 2016 - Octuber 2019",
         activities: [
           "Develop <span class='font-bold text-orange-400'>web applications</span>.",
           "Develop <span class='font-bold text-orange-400'>Restful API</span> services.",
-          "Develop <span class='font-bold text-orange-400'>multimedia</span> content for training"
+          "Develop <span class='font-bold text-orange-400'>multimedia</span> content for training."
+        ]
+      },
+      {
+        lang: "es",
+        logo: "/assets/images/brands/virket_logo.svg",
+        job: "Desarrollador Backend",
+        date: "Septiembre 2020 - Actual",
+        activities: [
+          "Creación de <span class='font-bold text-orange-400'>API's</span> para la interconexión de múltiples servicios.",
+          "Desarrollo <span class='font-bold text-orange-400'>microservicios</span> para la automatización de tareas y optimización de procesos.",
+          "Desarrollo de <span class='font-bold text-orange-400'>apps web</span> y paneles administrativos (cms, dashboard, etc).",
+          "Desarrollo de aplicaciones web responsivas <span class='font-bold text-orange-400'>amigables para el usuario</span>.",
+          "Escritura de librerias y componentes <span class='font-bold text-orange-400'>reutilizables</span> para uso futuro.",
+          "<span class='font-bold text-orange-400'>Optimización</span> de  applicaiones en rendimiento, tamaño y la escalabilidad.",
+          "Uso de la metodología <span class='font-bold text-orange-400'>Scrum</span> para gestionar el desarrollo de proyectos.",
+        ]
+      },
+      {
+        lang: "es",
+        logo: "/assets/images/brands/tecno_aplicada.svg",
+        job: "Desarrollador PHP",
+        date: "Diciembre 2019 - Marzo 2020",
+        activities: [
+          "Desarrollo de servicios backend API <span class='font-bold text-orange-400'>RESTful</span> y <span class='font-bold text-orange-400'>SOAP</span>.",
+          "Desarrollo de <span class='font-bold text-orange-400'>aplicaciones web</span> y paneles de administración.",
+          "Realización de <span class='font-bold text-orange-400'>pruebas unitarias</span> en Laravel y Angular.",
+          "Uso de metodología ágil <span class='font-bold text-orange-400'>Scrum</span>.",
+        ]
+      },
+      {
+        lang: "es",
+        logo: "/assets/images/brands/weplaycode.png",
+        job: "Desarrollador Fullstack",
+        date: "Noviembre 2018 - Noviembre 2019",
+        activities: [
+          "Desarrollo de multiples paneles administrativos para <span class='font-bold text-orange-400'>aplicaciones web</span>.",
+          "Desarrollo backend de servicios <span class='font-bold text-orange-400'>API Restful</span>.",
+          "Desarrollo de <span class='font-bold text-orange-400'>Apps en linea</span> para simuladores 3D (Unity 3D).",
+          "Realización de <span class='font-bold text-orange-400'>pruebas unitarias</span>.",
+          "Administracion de servidores <span class='font-bold text-orange-400'>VPS</span>."
+        ]
+      },
+      {
+        lang: "es",
+        logo: "/assets/images/brands/novetec.png",
+        job: "Desarrollador Web",
+        date: "Marzo 2016 - Octubre 2019",
+        activities: [
+          "Desarrollo de <span class='font-bold text-orange-400'>aplicaciones web</span>.",
+          "Desarrollo de servicios <span class='font-bold text-orange-400'>API Restful</span>.",
+          "Desarrollo de contenido <span class='font-bold text-orange-400'>multimedia</span> para capacitación."
         ]
       }
     ]
@@ -106,21 +167,45 @@ export default class PortfolioComponent {
     status: "success",
     data: [
       {
+        lang: 'en',
         logo: "/assets/images/projects/ytuquieneres.jpg",
         title: "Linkcards Website",
-        description: "pagina de micrositio web linkcards",
+        description: "Website of Multi User Link Cards",
         link: "https://ytuquieneres.com"
       },
       {
+        lang: 'en',
         logo: "/assets/images/projects/compuxt.jpg",
         title: "Computer Ecommerce Website",
-        description: "A powerful website",
+        description: "A Powerful Ecomerce Platform",
         link: "https://compuxt.com"
       },
       {
+        lang: 'en',
         logo: "/assets/images/projects/acupunturareyes.jpg",
         title: "Acupunture Reyes Webpage",
-        description: "A powerful website",
+        description: "A Powerful Website (SPA)",
+        link: "https://acupunturareyes.com/"
+      },
+      {
+        lang: 'es',
+        logo: "/assets/images/projects/ytuquieneres.jpg",
+        title: "Linkcards Website",
+        description: "Sitio web de Tarjetas de Enlace multiusuario",
+        link: "https://ytuquieneres.com"
+      },
+      {
+        lang: 'es',
+        logo: "/assets/images/projects/compuxt.jpg",
+        title: "Computer Ecommerce Platform",
+        description: "Una poderosa Plataforma Ecommerce",
+        link: "https://compuxt.com"
+      },
+      {
+        lang: 'es',
+        logo: "/assets/images/projects/acupunturareyes.jpg",
+        title: "Página Web de Acupuntura Reyes",
+        description: "Una Poderosa Página Web (SPA)",
         link: "https://acupunturareyes.com/"
       }
     ]
@@ -130,10 +215,12 @@ export default class PortfolioComponent {
 
   public menuSelected: string = 'home';
 
-  constructor() {
+  public langSelected: string = 'en';
+
+  constructor(private translate: TranslateService, private sanitizer: DomSanitizer) {
     // this.responseData.data[0].job
     console.log(this.responseData.data[0].job);
-
+    this.setAppLang();
   }
 
   ngOnInit(): void {
@@ -145,6 +232,24 @@ export default class PortfolioComponent {
         this.scrollTo(document.documentElement);
       });
     }
+  }
+
+  setAppLang():void{
+    this.translate.setDefaultLang( this.langSelected );
+    // this.translate.use(this.translate.getBrowserLang()!);
+  }
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
+    this.langSelected = lang;
+  }
+
+  getTranslation(key: string): string {
+    return this.translate.instant(key);
+  }
+
+  transform(value: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(value);
   }
 
   scrollTo(element: HTMLElement, to: number = 0, duration: number = 500) {

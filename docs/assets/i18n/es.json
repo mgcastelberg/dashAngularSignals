@@ -1,0 +1,15 @@
+{
+  "hello": "Hola Mundo",
+  "home": "Inicio",
+  "experience": "Experiencia",
+  "projects": "Proyectos",
+  "stack": "Stack",
+  "contact": "Contacto",
+  "language": "Idioma",
+  "english": "Inglés",
+  "spanish": "Español",
+  "skill": "Desarrollador FullStack",
+  "view site": "Ver Sitio",
+  "availability": "Disponible para trabajar",
+  "experience_data": "¡Hola! Soy <span class='font-bold text-orange-400'>Manuel Gómez C.</span>  desarrollador de software con <span class='font-bold text-orange-400'>10 años</span> de experiencia creando aplicaciones amigables para el usuario. A lo largo de mi trayectoria, he <span class='font-bold text-orange-400'>colaborado</span> con mis compañeros de trabajo en diversas áreas como backend, frontend, diseño y gestión de bases de datos. <span class='font-bold text-orange-400'>Exploro constantemente nuevas tecnologías</span> y recursos para crear aplicaciones fluidas y escalables."
+}
